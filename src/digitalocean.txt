@@ -1,0 +1,6 @@
+IP: is 178.128.231.106
+
+sudo apt list --upgradable
+sudo apt update
+sudo apt upgrade
+
