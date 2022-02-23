@@ -1,6 +1,6 @@
 server {
     listen 80;
-    server_name weatherapi.talkpython.com 128.199.4.0;
+    server_name weatherapi.leftwright.ca 178.128.231.106;
     server_tokens off;
     charset utf-8;
 
@@ -8,7 +8,7 @@ server {
         gzip            on;
         gzip_buffers    8 256k;
 
-        alias /apps/app_repo/ch08-deployment/static;
+        alias /apps/app_repo/static;
         expires 365d;
     }
     location / {
