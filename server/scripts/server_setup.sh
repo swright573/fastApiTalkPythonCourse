@@ -75,4 +75,4 @@ service nginx restart
 
 add-apt-repository ppa:certbot/certbot
 apt install python3-certbot-nginx
-certbot --nginx -d weatherapi.talkpython.com
+certbot --nginx -d weatherapi.leftwright.ca
