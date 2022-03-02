@@ -12,7 +12,7 @@ router = fastapi.APIRouter()
 @router.get('/', include_in_schema=False)
 async def index(request: Request):
     events = await report_service.get_reports()
-    data = {'request': request, 'events':events}
+    data = {'request': request, 'events': events}
     return templates.TemplateResponse('/home/index.html', data)
 
 @router.get('/favicon.ico')
