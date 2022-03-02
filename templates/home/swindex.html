@@ -16,47 +16,36 @@
         <strong>Endpoints</strong>
     <ul>
         <li>
-            <strong>Current weather in a city</strong><br>
-            <a href="/api/weather/toronto?state=ON&country=CA&units=metric"
+            <strong>Current weather in a location</strong><br>
+            <a href="/api/weather/43.8384/-79.0868"
                target="_blank"
-            ><strong>GET /api/weather/{city}?country={country}&state={state}</strong></a><br>
+            ><strong>GET /api/weather/{latitude}/{longitude}</strong></a><br>
             <br>
             <div style="font-size: 12px;">
                 <strong>Parameters</strong>
                 <ul>
-                    <li><strong>Required</strong>: <code>city={city}</code> - the city you want to get the weather at.
-                    </li>
-                    <li>Optional: <code>state={state}</code> - the state of the city (but required for US and CA), two letter
-                        abbreviations).
-                    </li>
-                    <li>Optional: <code>country={country}</code> - country, CA if none specific (two letter
-                        abbreviations).
-                    </li>
                     <li>Optional: <code>units={units}</code> - units: {metric, imperial, standard}, defaults to metric.
                     </li>
                 </ul>
 
                 <strong>Response JSON</strong>
                 <ul>
-                    <li>Click the link above to see example output.
+                    <li>Click <a href="/api/weather/43.8384/-79.0868&units=metric"
+                                 target="_blank"
+                    >the link above</a> to see example output.
                     </li>
                 </ul>
             </div>
         </li>
     </ul>
     </p>
-
-    {% if events %}
     <div>
         <h2>Recent weather events</h2>
         <ul>
             {% for e in events %}
-            <li> {{ e.location.city }}, {{ e.location.country }}: {{ e.description }}</li>
+            <li> {{ e.location.lat, e.location.lon }}: {{  e.description }}</li>
             {% endfor %}
         </ul>
-    </div>
-    {% endif %}
-
     </div>
 
 {% endblock %}

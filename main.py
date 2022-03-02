@@ -21,8 +21,8 @@ def configure():
 
 def configure_routing():
     api.mount('/static', StaticFiles(directory='static'), name='static')
-    api.include_router(home.router)
-    api.include_router(weather_api.router)
+    api.include_router(home.router)  # found in ./views/home.py
+    api.include_router(weather_api.router)  # found in ./api/weather_api.py
 
 def configure_apikeys():
     file = Path('settings.json').absolute()
@@ -35,7 +35,7 @@ def configure_apikeys():
         openweather_service.api_key = settings.get('api_key')
 
 def configure_fake_data():
-    loc = Location(lat="44", lon="57")
+    loc = Location(city="Pickering", state="ON", country="CA")
     asyncio.run(report_service.add_report("Windy", loc))
     asyncio.run(report_service.add_report("Wild and wooly", loc))
 

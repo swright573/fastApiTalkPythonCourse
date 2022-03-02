@@ -2,7 +2,7 @@ from typing import Optional
 
 from pydantic import BaseModel
 
-
 class Location(BaseModel):
-    lat: str
-    lon: str
+    city: str
+    state: Optional[str] = None
+    country: str = 'CA'

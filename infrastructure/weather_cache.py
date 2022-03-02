@@ -5,8 +5,8 @@ __cache = {}  # could use redis or another tool, using memory as a simple soluti
 lifetime_in_hours = 1.0
 
 
-def get_weather(lat: str, lon: str, units: str) -> Optional[dict]:
-    key = __create_key(lat, lon, units)
+def get_weather(city: str, state: Optional[str], country: Optional[str], units: str) -> Optional[dict]:
+    key = __create_key(city, state, country, units)
     data: dict = __cache.get(key)
     if not data:
         return None
@@ -24,8 +24,8 @@ def get_weather(lat: str, lon: str, units: str) -> Optional[dict]:
     return None
 
 
-def set_weather(lat: str, lon: str, units: str, value: dict):
-    key = __create_key(lat, lon, units)
+def set_weather(city: str, state: str, country: str, units: str, value: dict):
+    key = __create_key(city, state, country, units)
     data = {
         'time': datetime.datetime.now(),
         'value': value
@@ -34,11 +34,16 @@ def set_weather(lat: str, lon: str, units: str, value: dict):
     __clean_out_of_date()
 
 
-def __create_key(lat: str, lon: str, units: str) -> Tuple[str, str, str]:
-    if not lat or not lon or not units:
-        raise Exception("Latitude, longitude, and units are required")
+def __create_key(city: str, state: str, country: str, units: str) -> Tuple[str, str, str, str]:
+    if not city or not units:
+        raise Exception("City and units are required")
 
-    return lat.strip().lower(), lon.strip().lower(), units.strip().lower()
+    if not state:
+        state = ""
+    if not country:
+        country = ""
+
+    return city.strip().lower(), state.strip().lower(), country.strip(), units.strip().lower()
 
 
 def __clean_out_of_date():
