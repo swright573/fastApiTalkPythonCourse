@@ -43,7 +43,7 @@ async def reports_post(report_submittal: Report) -> Report:
 # added to test async concurrency
 @router.get('/api/testasync', name='test_async', response_class=PlainTextResponse)
 async def test_async(request: Request):
-    logging.basicConfig(level=logging.DEBUG)
+    logging.basicConfig(filename='async_test.log', encoding='utf-8', level=logging.DEBUG)
     client_host = request.client.host
     await run_functions(client_host)
     return PlainTextResponse(content='Susan Wright', status_code=200)
