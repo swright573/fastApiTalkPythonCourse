@@ -42,31 +42,30 @@ async def reports_post(report_submittal: Report) -> Report:
 
 # added to test async concurrency
 @router.get('/api/testasync', name='test_async', response_class=PlainTextResponse)
-async def test_async(request: Request):
+async def test_async(source: str):
     logging.basicConfig(filename='async_test.log', encoding='utf-8', level=logging.DEBUG)
-    client_host = request.client.host
-    await run_functions(client_host)
+    await run_functions(source)
     return PlainTextResponse(content='Susan Wright', status_code=200)
 
-async def function1(host):
-    logging.info(f'Client is {host}. Started function1().')
+async def function1(source):
+    logging.info(f'Client is {source}. Started function1().')
     await asyncio.sleep(3)
-    logging.info(f'Client is {host}. Finished function1().')
+    logging.info(f'Client is {source}. Finished function1().')
     return
 
-async def function2(host):
-    logging.info(f'Client is {host}. Started function2().')
+async def function2(source):
+    logging.info(f'Client is {source}. Started function2().')
     await asyncio.sleep(1)
-    logging.info(f'Client is {host}. Finished function2().')
+    logging.info(f'Client is {source}. Finished function2().')
     return
 
-async def function3(host):
-    logging.info(f'Client is {host}. Started function3().')
+async def function3(source):
+    logging.info(f'Client is {source}. Started function3().')
     await asyncio.sleep(5)
-    logging.info(f'Client is {host}. Finished function3().')
+    logging.info(f'Client is {source}. Finished function3().')
     return
 
-async def run_functions(host):
-    await function1(host)
-    await function2(host)
-    await function3(host)
+async def run_functions(source):
+    await function1(source)
+    await function2(source)
+    await function3(source)
